@@ -1,13 +1,10 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Проект космической экспедиции:
 
-Things you may want to cover:
+* Версия Ruby - 2.5.1
 
-* Ruby version
-
-* System dependencies
+* Версия Rails 5.2
 
 * Configuration
 
