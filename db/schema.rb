@@ -10,7 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_22_065049) do
+ActiveRecord::Schema.define(version: 2018_11_30_082412) do
+
+  create_table "expeditions", force: :cascade do |t|
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "itineraries", force: :cascade do |t|
+    t.string "title"
+    t.integer "expedition_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["expedition_id"], name: "index_itineraries_on_expedition_id", unique: true
+  end
+
+  create_table "itinerary_planets", force: :cascade do |t|
+    t.integer "itinerary_id"
+    t.integer "planet_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["itinerary_id"], name: "index_itinerary_planets_on_itinerary_id"
+    t.index ["planet_id"], name: "index_itinerary_planets_on_planet_id"
+  end
 
   create_table "planets", force: :cascade do |t|
     t.string "title"
@@ -19,6 +42,24 @@ ActiveRecord::Schema.define(version: 2018_11_22_065049) do
     t.float "distance"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "spaceships", force: :cascade do |t|
+    t.string "title"
+    t.float "velocity"
+    t.integer "expedition_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["expedition_id"], name: "index_spaceships_on_expedition_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "fio"
+    t.integer "age"
+    t.integer "expedition_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["expedition_id"], name: "index_users_on_expedition_id"
   end
 
 end
