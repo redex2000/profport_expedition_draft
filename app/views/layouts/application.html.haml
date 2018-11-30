@@ -13,4 +13,5 @@
       = alert
       = button_tag class: 'close', data: { dismiss: 'alert' }, aria: { label: 'close' } do
         %span{ aria: { hidden: 'true' } } &times;
+    = render 'shared/top_menu'
     = yield
