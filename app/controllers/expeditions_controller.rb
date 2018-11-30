@@ -1,10 +1,14 @@
 class ExpeditionsController < ApplicationController
   def index
-    render plain: 'Космическая экспедиция'
+    flash[:alert] = 'Список экспедиций'
   end
 
-
   def show
-    render plain: params.inspect
+  end
+
+  def new
+  end
+
+  def create
   end
 end
