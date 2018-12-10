@@ -10,12 +10,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_30_082412) do
+ActiveRecord::Schema.define(version: 2018_12_08_070820) do
+
+  create_table "authors", force: :cascade do |t|
+    t.string "fio"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "books_count", default: 0
+  end
+
+  create_table "books", force: :cascade do |t|
+    t.string "title"
+    t.integer "author_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_id"], name: "index_books_on_author_id"
+  end
+
+  create_table "corporations", force: :cascade do |t|
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "expeditions", force: :cascade do |t|
     t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "corporation_id"
+    t.datetime "start_date"
+    t.boolean "active", default: false
+    t.index ["corporation_id"], name: "index_expeditions_on_corporation_id"
   end
 
   create_table "itineraries", force: :cascade do |t|
@@ -33,6 +58,34 @@ ActiveRecord::Schema.define(version: 2018_11_30_082412) do
     t.datetime "updated_at", null: false
     t.index ["itinerary_id"], name: "index_itinerary_planets_on_itinerary_id"
     t.index ["planet_id"], name: "index_itinerary_planets_on_planet_id"
+  end
+
+  create_table "paper_boxes", force: :cascade do |t|
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "paper_boxes_papers", id: false, force: :cascade do |t|
+    t.integer "paper_box_id", null: false
+    t.integer "paper_id", null: false
+    t.index ["paper_box_id"], name: "index_paper_boxes_papers_on_paper_box_id"
+    t.index ["paper_id"], name: "index_paper_boxes_papers_on_paper_id"
+  end
+
+  create_table "papers", force: :cascade do |t|
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "paragraphs", force: :cascade do |t|
+    t.string "title"
+    t.boolean "published", default: false
+    t.integer "book_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_paragraphs_on_book_id"
   end
 
   create_table "planets", force: :cascade do |t|
