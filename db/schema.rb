@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_11_124626) do
+ActiveRecord::Schema.define(version: 2018_12_11_130940) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(version: 2018_12_11_124626) do
     t.bigint "expedition_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float "route_length", default: 0.0
     t.index ["expedition_id"], name: "index_itineraries_on_expedition_id", unique: true
   end
 
