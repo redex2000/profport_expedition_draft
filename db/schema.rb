@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_11_130940) do
+ActiveRecord::Schema.define(version: 2018_12_11_132529) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -120,6 +120,7 @@ ActiveRecord::Schema.define(version: 2018_12_11_130940) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "working", default: true
+    t.string "type"
     t.index ["expedition_id"], name: "index_spaceships_on_expedition_id"
   end
 

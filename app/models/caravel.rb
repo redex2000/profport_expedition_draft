@@ -1,0 +1,2 @@
+class Caravel < Spaceship
+end
