@@ -1,12 +1,6 @@
 class Spaceship < ApplicationRecord
   belongs_to :expedition
-  has_many :parts, class_name: "Detail"
-
-  before_destroy :test
-
-  private
-
-  def test
-    puts "Уничтожаемся!"
-  end
+  has_many :details
+  has_many :skins, through: :details, source: :part, source_type: "Covering"
+  has_many :motors, through: :details, source: :part, source_type: "Engine"
 end
