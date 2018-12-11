@@ -10,7 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_08_070820) do
+ActiveRecord::Schema.define(version: 2018_12_11_105901) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "authors", force: :cascade do |t|
     t.string "fio"
@@ -21,39 +24,37 @@ ActiveRecord::Schema.define(version: 2018_12_08_070820) do
 
   create_table "books", force: :cascade do |t|
     t.string "title"
-    t.integer "author_id"
+    t.bigint "author_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["author_id"], name: "index_books_on_author_id"
   end
 
-  create_table "corporations", force: :cascade do |t|
+  create_table "details", force: :cascade do |t|
     t.string "title"
+    t.bigint "spaceship_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["spaceship_id"], name: "index_details_on_spaceship_id"
   end
 
   create_table "expeditions", force: :cascade do |t|
     t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "corporation_id"
-    t.datetime "start_date"
-    t.boolean "active", default: false
-    t.index ["corporation_id"], name: "index_expeditions_on_corporation_id"
   end
 
   create_table "itineraries", force: :cascade do |t|
     t.string "title"
-    t.integer "expedition_id"
+    t.bigint "expedition_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["expedition_id"], name: "index_itineraries_on_expedition_id", unique: true
   end
 
   create_table "itinerary_planets", force: :cascade do |t|
-    t.integer "itinerary_id"
-    t.integer "planet_id"
+    t.bigint "itinerary_id"
+    t.bigint "planet_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["itinerary_id"], name: "index_itinerary_planets_on_itinerary_id"
@@ -67,8 +68,8 @@ ActiveRecord::Schema.define(version: 2018_12_08_070820) do
   end
 
   create_table "paper_boxes_papers", id: false, force: :cascade do |t|
-    t.integer "paper_box_id", null: false
-    t.integer "paper_id", null: false
+    t.bigint "paper_box_id", null: false
+    t.bigint "paper_id", null: false
     t.index ["paper_box_id"], name: "index_paper_boxes_papers_on_paper_box_id"
     t.index ["paper_id"], name: "index_paper_boxes_papers_on_paper_id"
   end
@@ -82,7 +83,7 @@ ActiveRecord::Schema.define(version: 2018_12_08_070820) do
   create_table "paragraphs", force: :cascade do |t|
     t.string "title"
     t.boolean "published", default: false
-    t.integer "book_id"
+    t.bigint "book_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["book_id"], name: "index_paragraphs_on_book_id"
@@ -100,7 +101,7 @@ ActiveRecord::Schema.define(version: 2018_12_08_070820) do
   create_table "spaceships", force: :cascade do |t|
     t.string "title"
     t.float "velocity"
-    t.integer "expedition_id"
+    t.bigint "expedition_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["expedition_id"], name: "index_spaceships_on_expedition_id"
@@ -109,10 +110,17 @@ ActiveRecord::Schema.define(version: 2018_12_08_070820) do
   create_table "users", force: :cascade do |t|
     t.string "fio"
     t.integer "age"
-    t.integer "expedition_id"
+    t.bigint "expedition_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["expedition_id"], name: "index_users_on_expedition_id"
   end
 
+  add_foreign_key "details", "spaceships"
+  add_foreign_key "itineraries", "expeditions"
+  add_foreign_key "itinerary_planets", "itineraries"
+  add_foreign_key "itinerary_planets", "planets"
+  add_foreign_key "paragraphs", "books"
+  add_foreign_key "spaceships", "expeditions"
+  add_foreign_key "users", "expeditions"
 end
