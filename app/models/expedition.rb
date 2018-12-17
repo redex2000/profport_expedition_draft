@@ -4,4 +4,12 @@ class Expedition < ApplicationRecord
   has_many :spaceships, -> { extending FindRecent }
   has_one :itinerary
 
+  after_create :create_assoc
+
+  enum state: [:initiated, :started, :finished]
+
+  def create_assoc
+    create_itinerary route_length: 150
+  end
+
 end
