@@ -4,4 +4,6 @@ Rails.application.routes.draw do
   resources :expeditions
   resources :itineraries
   resources :spaceships
+
+  resources :galaxies, only: %I[index new create]
 end
