@@ -1,4 +1,6 @@
 class ExpeditionsController < ApplicationController
+  before_action :set_model, except: %I[index new create]
+
   def index
     @expeditions = Expedition.all
   end
@@ -17,6 +19,20 @@ class ExpeditionsController < ApplicationController
     else
       flash[:alert] = "Ошибка при сохранении"
       render :new
+    end
+  end
+
+
+  def edit
+  end
+
+
+  def update
+    if @expedition.update expedition_params
+      redirect_to expeditions_path, notice: 'Updated'
+    else
+      flash[:alert] = "Ошибка при сохранении"
+      render :edit
     end
   end
 

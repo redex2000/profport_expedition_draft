@@ -4,6 +4,8 @@ class Expedition < ApplicationRecord
   has_many :spaceships, -> { extending FindRecent }
   has_one :itinerary
 
+  validates :title, presence: true
+
   after_create :create_assoc
 
   enum state: [:initiated, :started, :finished]
