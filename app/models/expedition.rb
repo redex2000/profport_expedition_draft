@@ -1,8 +1,12 @@
 class Expedition < ApplicationRecord
+  default_scope { order updated_at: :desc }
+
   has_many :available_spaceships, -> { where working: true }, class_name: "Spaceship"
   has_many :stock_spaceships, -> { where working: false }, class_name: "Spaceship"
   has_many :spaceships, -> { extending FindRecent }
   has_one :itinerary
+  has_many :investments
+  has_many :investors, through: :investments
 
   validates :title, presence: true
 

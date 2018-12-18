@@ -3,6 +3,14 @@ class ExpeditionsController < ApplicationController
 
   def index
     @expeditions = Expedition.all
+    @data = Expedition
+      .unscope(:order)
+      .joins(:investments)
+      .where("investments.paid = true")
+      .where("investments.created_at between ? and ?", Time.zone.now - 3.days, Time.zone.now)
+      .select("expeditions.id e_id, count(investments.id) as investments_count, (count(investments.id) * expeditions.price) as e_cost")
+      .group("expeditions.id")
+      .order("e_cost desc")
   end
 
   def show

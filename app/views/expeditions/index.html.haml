@@ -9,10 +9,8 @@
       %th
 
   %tbody
-    - @expeditions.each do |expedition|
+    - @data.each do |result|
       %tr
-        %td= link_to expedition.title, expedition_path(expedition)
-        %td
-          = link_to 'Редактировать', edit_expedition_path(expedition), class: 'btn btn-warning'
-          |
-          = link_to 'Удалить', expedition_path(expedition), method: :delete, data: { confirm: 'Вы уверены?' }, class: 'btn btn-danger'
+        %td= result[:e_cost]
+        %td= result[:e_id]
+        %td= result[:investments_count]

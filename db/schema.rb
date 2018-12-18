@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_18_065517) do
+ActiveRecord::Schema.define(version: 2018_12_18_080313) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,10 +57,27 @@ ActiveRecord::Schema.define(version: 2018_12_18_065517) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "state", default: 0
+    t.float "price", default: 100.0
   end
 
   create_table "galaxies", force: :cascade do |t|
     t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "investments", force: :cascade do |t|
+    t.bigint "expedition_id"
+    t.bigint "investor_id"
+    t.boolean "paid", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["expedition_id"], name: "index_investments_on_expedition_id"
+    t.index ["investor_id"], name: "index_investments_on_investor_id"
+  end
+
+  create_table "investors", force: :cascade do |t|
+    t.string "fio"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -141,6 +158,8 @@ ActiveRecord::Schema.define(version: 2018_12_18_065517) do
   end
 
   add_foreign_key "details", "spaceships"
+  add_foreign_key "investments", "expeditions"
+  add_foreign_key "investments", "investors"
   add_foreign_key "itineraries", "expeditions"
   add_foreign_key "itinerary_planets", "itineraries"
   add_foreign_key "itinerary_planets", "planets"
