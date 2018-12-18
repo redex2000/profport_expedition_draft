@@ -2,7 +2,6 @@ class ExpeditionsController < ApplicationController
   before_action :set_model, except: %I[index new create]
 
   def index
-    @expeditions = Expedition.all
     @data = Expedition
       .unscope(:order)
       .joins(:investments)
@@ -11,6 +10,9 @@ class ExpeditionsController < ApplicationController
       .select("expeditions.id e_id, count(investments.id) as investments_count, (count(investments.id) * expeditions.price) as e_cost")
       .group("expeditions.id")
       .order("e_cost desc")
+      .having('(count(investments.id) * expeditions.price) > 100')
+
+    @expeditions = @data.inject([]) { |result, exp| result.push Expedition.find(exp[:e_id]) }
   end
 
   def show

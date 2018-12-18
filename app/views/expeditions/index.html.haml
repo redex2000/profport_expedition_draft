@@ -2,10 +2,12 @@
 
 .float-right
   = link_to 'Создать', new_expedition_path, class: 'btn btn-info'
+
 %table.table.table-hover
   %thead
     %tr
       %th Название
+      %th
       %th
 
   %tbody
@@ -14,3 +16,9 @@
         %td= result[:e_cost]
         %td= result[:e_id]
         %td= result[:investments_count]
+
+    - @expeditions.each do |expedition|
+      %tr
+        %td= expedition.title
+        %td= expedition.spaceships.count
+        %td
