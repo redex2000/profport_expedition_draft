@@ -2,6 +2,15 @@ require "application_system_test_case"
 
 class ExpeditionsTest < ApplicationSystemTestCase
   test 'visit index page' do
+    user = create(:cosmonaut)
+
+    visit user_session_url
+
+    fill_in 'Email', with: user.email
+    fill_in 'Password', with: user.password
+
+    find('input[type="submit"]').click
+
     visit expeditions_url
 
     assert_title 'Список экспедиций|Космическое агентство «ПрофПорт-Экспедиции»'

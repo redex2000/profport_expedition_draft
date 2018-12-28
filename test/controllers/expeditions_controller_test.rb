@@ -2,6 +2,9 @@ require 'test_helper'
 
 class ExpeditionsControllerTest < ActionDispatch::IntegrationTest
   test 'expeditions index view' do
+    create(:cosmonaut)
+    sign_in(:cosmonaut)
+
     get expeditions_url
 
     assert_select 'table.table' do
