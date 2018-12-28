@@ -1,5 +1,6 @@
 class ExpeditionsController < ApplicationController
   before_action :set_model, except: %I[index new create]
+  before_action :authorize_class, only: %I[index new create]
 
   def index
     @data = Expedition
@@ -50,9 +51,15 @@ class ExpeditionsController < ApplicationController
 
   def set_model
     @expedition = Expedition.find params[:id]
+    authorize @expedition
   end
 
   def expedition_params
     params.require(:expedition).permit(:title)
+  end
+
+
+  def authorize_class
+    authorize Expedition
   end
 end

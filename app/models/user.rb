@@ -8,4 +8,6 @@ class User < ApplicationRecord
   validates :email, uniqueness: true, format: { with: /\A\w+@\w+\.\w{2,6}\z/ }
   validates :password, length: { in: 6..20 }, confirmation: true
 
+  enum role: %I[cosmonaut boss]
+
 end
