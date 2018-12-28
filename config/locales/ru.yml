@@ -1,0 +1,6 @@
+ru:
+  activemodel:
+    attributes:
+      person:
+        email: Электропочта
+        title: Название

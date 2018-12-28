@@ -15,5 +15,7 @@ class ExpeditionsTest < ApplicationSystemTestCase
     click_on 'Save'
 
     assert_text 'Created'
+
+    assert_select
   end
 end
