@@ -7,6 +7,7 @@ class Expedition < ApplicationRecord
   has_one :itinerary
   has_many :investments
   has_many :investors, through: :investments
+  has_many :users
 
   validates :title, presence: true
 

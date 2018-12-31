@@ -1,2 +1,4 @@
-%h1 Expeditions#show
-%p Find me in app/views/expeditions/show.html.haml
+%h2 Команда
+%table.table
+  %tbody
+    = render partial: 'member', collection: @expedition.users

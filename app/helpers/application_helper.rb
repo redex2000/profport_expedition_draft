@@ -18,4 +18,11 @@ module ApplicationHelper
       [title, ApplicationController::PAGE_TITLE].compact.join("|")
     end
   end
+
+
+  def gravatar_for(user)
+    id = Digest::MD5.hexdigest(user.email.downcase)
+    url = "https://secure.gravatar.com/avatar/#{id}"
+    image_tag url
+  end
 end

@@ -7,4 +7,9 @@ class ExpeditionPolicy < ApplicationPolicy
   def create?
     @user.boss?
   end
+
+
+  def show?
+    @user.boss? || @user.cosmonaut?
+  end
 end
