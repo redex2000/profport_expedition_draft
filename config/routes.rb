@@ -9,4 +9,10 @@ Rails.application.routes.draw do
   resources :spaceships
 
   resources :galaxies, only: %I[index new create]
+
+  scope module: "api" do
+    namespace :v1 do
+      resources :expeditions, only: %I[index show]
+    end
+  end
 end
