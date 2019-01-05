@@ -2,6 +2,9 @@ class Api::ApiController < ApplicationController
   protect_from_forgery with: :null_session, if: Proc.new { |c| c.request.format.json? }
   skip_before_action :authenticate_user!
   before_action :auth_by_token
+  before_action :parse_request
+
+  attr_reader :json
 
   include ActionController::HttpAuthentication::Token::ControllerMethods
 
@@ -12,6 +15,11 @@ class Api::ApiController < ApplicationController
       User.find_by(auth_token: token).present?
     end
     render json: { error: 'Неправильный токен!' }, status: 403 unless result
+  end
+
+
+  def parse_request
+    @json = JSON.parse(request.body.read)
   end
 
 end

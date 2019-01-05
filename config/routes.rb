@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
   scope module: "api" do
     namespace :v1 do
-      resources :expeditions, only: %I[index show]
+      resources :expeditions, only: %I[index show create]
     end
   end
 end

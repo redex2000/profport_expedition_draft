@@ -15,8 +15,12 @@ class Expedition < ApplicationRecord
 
   enum state: [:initiated, :started, :finished]
 
+  private
+
   def create_assoc
     create_itinerary route_length: 150
   end
+
+
 
 end
