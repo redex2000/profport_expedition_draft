@@ -9,4 +9,12 @@ class User < ApplicationRecord
 
   enum role: %I[cosmonaut boss]
 
+  before_create :set_auth_token
+
+  private
+
+  def set_auth_token
+    self.auth_token = Devise.friendly_token
+  end
+
 end
