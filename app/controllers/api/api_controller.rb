@@ -19,7 +19,8 @@ class Api::ApiController < ApplicationController
 
 
   def parse_request
-    @json = JSON.parse(request.body.read)
+    content = request.body.read
+    @json = JSON.parse(content) if content.present?
   end
 
 end
