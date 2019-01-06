@@ -17,6 +17,9 @@ Rails.application.routes.draw do
 
     namespace :v2 do
       resources :expeditions, only: %I[index show create update]
+      resources :users, only: [] do
+        patch :sign_in, on: :collection
+      end
     end
   end
 end
