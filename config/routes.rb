@@ -14,5 +14,9 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :expeditions, only: %I[index show create]
     end
+
+    namespace :v2 do
+      resources :expeditions, only: %I[index show create update]
+    end
   end
 end
