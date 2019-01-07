@@ -21,5 +21,12 @@ Rails.application.routes.draw do
         patch :sign_in, on: :collection
       end
     end
+
+    namespace :v3 do
+      resources :users, only: [] do
+        patch :sign_in, on: :collection
+      end
+      resources :expeditions, only: %I[index show create]
+    end
   end
 end
