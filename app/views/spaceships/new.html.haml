@@ -1,0 +1,5 @@
+= simple_form_for @spaceship do |form|
+  = form.input :title
+  = form.input :velocity
+  = form.association :expedition
+  = form.submit 'Create'

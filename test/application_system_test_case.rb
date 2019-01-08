@@ -6,12 +6,12 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   def sign_in
     user = create(:cosmonaut)
 
-    visit new_session_url
+    visit new_user_session_path
 
     fill_in 'Email', with: user.email
     fill_in 'Password', with: user.password
 
-    click_on 'Sign in'
+    find('input[type="submit"]').click
   end
 
 end
