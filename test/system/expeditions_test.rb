@@ -25,4 +25,20 @@ class ExpeditionsTest < ApplicationSystemTestCase
 
     assert_text 'Created'
   end
+
+  test 'destroy expedition' do
+
+    sign_in
+
+    create_list(:expedition, 5)
+
+    visit expeditions_path
+
+
+    accept_confirm do
+      all('tbody tr')[0].all('td')[2].find('a').click
+    end
+
+    assert_match 'Удалено', find('.alert.alert-dismissible.alert-info.fade.show').text
+  end
 end

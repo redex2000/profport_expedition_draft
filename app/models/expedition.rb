@@ -3,8 +3,8 @@ class Expedition < ApplicationRecord
 
   has_many :available_spaceships, -> { where working: true }, class_name: "Spaceship"
   has_many :stock_spaceships, -> { where working: false }, class_name: "Spaceship"
-  has_many :spaceships, -> { extending FindRecent }
-  has_one :itinerary
+  has_many :spaceships, dependent: :destroy
+  has_one :itinerary, dependent: :destroy
   has_many :investments
   has_many :investors, through: :investments
   has_many :users

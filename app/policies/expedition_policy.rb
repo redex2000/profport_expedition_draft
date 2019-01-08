@@ -4,6 +4,11 @@ class ExpeditionPolicy < ApplicationPolicy
   end
 
 
+  def destroy?
+    @user.boss?
+  end
+
+
   def create?
     @user.boss?
   end

@@ -7,5 +7,10 @@ FactoryBot.define do
       email { "cosmonaut@mail.bro" }
     end
 
+    factory :boss do
+      role { User.roles[:boss] }
+      email { "boss@mail.bro" }
+    end
+
   end
 end

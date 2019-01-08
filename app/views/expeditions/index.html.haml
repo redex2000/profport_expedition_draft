@@ -4,9 +4,6 @@
   .float-right
     = link_to 'Создать', new_expedition_path, class: 'btn btn-info'
 
-- cosmonaut = User.last
-- hash_params = { user: { email: cosmonaut.email, password: cosmonaut.password }, authorization: "Token #{cosmonaut.auth_token}" }.to_json
-= link_to 'Update', sign_in_v2_users_path(hash_params, format: :json), method: :patch
 
 %table.table.table-hover
   %thead
@@ -16,14 +13,8 @@
       %th
 
   %tbody
-    - @data.each do |result|
-      %tr
-        %td= result[:e_cost]
-        %td= result[:e_id]
-        %td= result[:investments_count]
-
     - @expeditions.each do |expedition|
       %tr
         %td= expedition.title
         %td= expedition.spaceships.count
-        %td
+        %td= link_to 'Удалить', expedition_path(expedition), method: :delete, data: { confirm: 'Вы уверены?' }
