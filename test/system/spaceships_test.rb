@@ -5,15 +5,16 @@ class SpaceshipsTest < ApplicationSystemTestCase
     sign_in
 
     create(:expedition)
+    create(:expedition, title: 'На Арктур')
 
     visit new_spaceship_path
 
     fill_in 'Title', with: 'Быстроход'
     fill_in 'Velocity', with: '100'
-    select 'На Торманс', from: 'Expedition'
+    select 'На Арктур', from: 'Expedition'
 
     click_on 'Create'
 
-    assert_text 'На Торманс'
+    assert_text 'На Арктур'
   end
 end
