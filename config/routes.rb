@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :planets
   resources :expeditions do
     get :jsonp, on: :collection
+    get :cors, on: :collection
   end
   resources :itineraries
   resources :spaceships

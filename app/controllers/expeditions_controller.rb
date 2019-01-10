@@ -1,7 +1,7 @@
 class ExpeditionsController < ApplicationController
-  before_action :set_model, except: %I[index new create jsonp]
+  before_action :set_model, except: %I[index new create jsonp cors]
   before_action :authorize_class, only: %I[index new create]
-  skip_before_action :authenticate_user!, only: %I[jsonp]
+  skip_before_action :authenticate_user!, only: %I[jsonp cors]
 
   def index
     @expeditions = Expedition.all
@@ -49,6 +49,18 @@ class ExpeditionsController < ApplicationController
     respond_to do |format|
       format.js
       format.html
+    end
+  end
+
+  # Для простейшего запроса нужно выполнить из пустой страницы Хрома:
+  # var xhr = new XMLHttpRequest();
+  # xhr.open("GET", "http://localhost:3001/expeditions/cors.txt");
+  # xhr.setRequestHeader("Content-Type", "text/plain");
+  # xhr.onload = function(res) { console.log(res.currentTarget.responseText); }
+  # xhr.send();
+  def cors
+    respond_to do |format|
+      format.text { render plain: 'Hello' }
     end
   end
 
