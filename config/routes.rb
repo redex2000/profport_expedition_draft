@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   root to: 'galaxies#index'
 
   resources :planets
-  resources :expeditions
+  resources :expeditions do
+    get :jsonp, on: :collection
+  end
   resources :itineraries
   resources :spaceships
 

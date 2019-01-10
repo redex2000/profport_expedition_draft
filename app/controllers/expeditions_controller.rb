@@ -1,6 +1,7 @@
 class ExpeditionsController < ApplicationController
-  before_action :set_model, except: %I[index new create]
+  before_action :set_model, except: %I[index new create jsonp]
   before_action :authorize_class, only: %I[index new create]
+  skip_before_action :authenticate_user!, only: %I[jsonp]
 
   def index
     @expeditions = Expedition.all
@@ -41,6 +42,14 @@ class ExpeditionsController < ApplicationController
   def destroy
     @expedition.destroy
     redirect_to expeditions_path, notice: 'Удалено'
+  end
+
+
+  def jsonp
+    respond_to do |format|
+      format.js
+      format.html
+    end
   end
 
   private

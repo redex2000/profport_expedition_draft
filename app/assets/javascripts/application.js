@@ -14,3 +14,48 @@
 //= require jquery
 //= require popper
 //= require bootstrap-sprockets
+
+$(function() {
+    var CallbackRegistry = {};
+
+    function testJSONP(url, onSuccess, onError) {
+        console.log('Привет, JSONP');
+
+        var scriptOK = false;
+        var callbackName = 'callbackName'; //`cb${String(Math.random()).slice(-6)}`;
+        url += ~url.indexOf('?') ? '&' : '?';
+        url += `callback=CallbackRegistry.${callbackName}`;
+
+        CallbackRegistry[callbackName] = function(data) {
+            scriptOK = true;
+            delete CallbackRegistry[callbackName];
+            onSuccess(data);
+        };
+
+        function checkCallback() {
+            if (scriptOK) return;
+            delete CallbackRegistry[callbackName];
+            onError(url);
+        }
+
+        var script = document.createElement('script');
+
+        script.onload = script.onerror = checkCallback;
+        script.src = url;
+
+        document.body.appendChild(script);
+    }
+
+    function onOk(data) {
+        console.log(`Данные загружены ${data}`);
+    }
+
+    function onFail(url) {
+        console.log(`Некорректный URL ${url}`);
+    }
+
+    $('#test_jsonp').click(() => {
+        testJSONP('/expeditions/jsonp.js', onOk, onFail);
+    });
+
+});
