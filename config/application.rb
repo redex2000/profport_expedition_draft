@@ -19,10 +19,10 @@ module ProfportExpeditionDraft
 
     config.middleware.use Rack::Attack
 
-    config.middleware.insert 0, Rack::Cors do
+    config.middleware.insert_before 0, Rack::Cors, debug: true, logger: -> { Rails.logger } do
       allow do
-        origins '*'
-        resource '*', headers: :any, methods: %I[get post options]
+        origins 'profport.ru', 'google.com'
+        resource '/v3/expeditions/*', headers: %w[Authorization], methods: %I[get options], expose: %w(ETag)
       end
     end
 
