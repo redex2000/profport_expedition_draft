@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  if Rails.env.development?
+    mount GraphiQL::Rails::Engine, at: "/graphiql", graphql_path: "/graphql"
+  end
+  post "/graphql", to: "graphql#execute"
   devise_for :users, controllers: { registrations: 'users/registrations' }
   root to: 'galaxies#index'
 
@@ -29,6 +33,7 @@ Rails.application.routes.draw do
       resources :users, only: [] do
         patch :sign_in, on: :collection
       end
+      # Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo3fQ.-Bm3C1AGUjjUjRiOIWPc7iZ32e5eFWRTk87ve-xXKWw
       resources :expeditions, only: %I[index show create]
     end
   end
