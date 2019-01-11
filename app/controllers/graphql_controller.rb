@@ -1,6 +1,17 @@
 class GraphqlController < Api::ApiController
   skip_before_action :auth_by_token, :parse_request
 
+
+  # Пример запроса
+  # {
+  #     expedition(id:101) {
+  #       title
+  #       spaceships {
+  #         title
+  #         velocity
+  #       }
+  #     }
+  # }
   def execute
     variables = ensure_hash(params[:variables])
     query = params[:query]
