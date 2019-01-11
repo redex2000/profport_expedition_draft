@@ -10,5 +10,11 @@ module Types
     def expedition(id: )
       Expedition.find(id)
     end
+
+    field :expeditions, [Types::ExpeditionType], null: false
+
+    def expeditions
+      Expedition.all
+    end
   end
 end
