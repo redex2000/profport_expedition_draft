@@ -1,4 +1,4 @@
 class ProfportExpeditionDraftSchema < GraphQL::Schema
-  # mutation(Types::MutationType)
+  mutation(Types::Mutation)
   query(Types::QueryType)
 end
