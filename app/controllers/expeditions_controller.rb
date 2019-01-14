@@ -41,7 +41,10 @@ class ExpeditionsController < ApplicationController
 
   def destroy
     @expedition.destroy
-    redirect_to expeditions_path, notice: 'Удалено'
+    respond_to do |format|
+      format.js
+      format.html { redirect_to expeditions_path, notice: 'Удалено' }
+    end
   end
 
 
