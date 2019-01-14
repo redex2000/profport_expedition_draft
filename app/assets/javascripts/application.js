@@ -14,7 +14,7 @@
 //= require jquery
 //= require popper
 //= require bootstrap-sprockets
-//= require ajax
+//= require slider
 
 $(function() {
     var CallbackRegistry = {};
