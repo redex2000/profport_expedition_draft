@@ -14,5 +14,5 @@
 //= require jquery
 //= require popper
 //= require bootstrap-sprockets
-//= require textarea
+//= require promises
 
