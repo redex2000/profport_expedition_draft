@@ -72,7 +72,7 @@ class ExpeditionsController < ApplicationController
   end
 
   def expedition_params
-    params.require(:expedition).permit(:title)
+    params.require(:expedition).permit(:title, :description)
   end
 
 

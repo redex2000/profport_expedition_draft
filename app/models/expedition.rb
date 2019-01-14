@@ -9,7 +9,7 @@ class Expedition < ApplicationRecord
   has_many :investors, through: :investments
   has_many :users
 
-  validates :title, presence: true
+  validates :title, :description, presence: true
 
   after_create :create_assoc
 
