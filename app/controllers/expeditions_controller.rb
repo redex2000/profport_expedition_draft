@@ -16,12 +16,19 @@ class ExpeditionsController < ApplicationController
 
   def create
     @expedition = Expedition.new expedition_params
-    if @expedition.save
-      redirect_to expeditions_path, notice: 'Created'
-    else
-      flash[:alert] = "Ошибка при сохранении"
-      render :new
+    respond_to do |format|
+      if @expedition.save
+        format.html { redirect_to expeditions_path, notice: 'Created' }
+        format.js
+      else
+        format.html do
+          flash[:alert] = "Ошибка при сохранении"
+          render :new
+        end
+        format.js
+      end
     end
+
   end
 
 

@@ -1,0 +1,3 @@
+:plain
+  $('form.simple_form').remove();
+  $('#expeditions').prepend('#{escape_javascript(render(partial: 'expedition', object: @expedition))}');

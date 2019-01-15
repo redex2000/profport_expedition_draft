@@ -1,0 +1,4 @@
+%tr{id: dom_id(expedition)}
+  %td= expedition.title
+  %td= expedition.spaceships.count
+  %td= link_to 'Удалить', expedition_path(expedition), method: :delete, data: { confirm: 'Вы уверены?' }, remote: true

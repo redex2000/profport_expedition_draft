@@ -1,4 +1,5 @@
-= simple_form_for @expedition do |form|
+- is_remote = local_assigns[:remote] || false
+= simple_form_for @expedition, remote: is_remote do |form|
   = form.input :title
   = form.input :description
   = form.submit 'Save'

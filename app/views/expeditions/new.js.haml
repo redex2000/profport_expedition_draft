@@ -1,0 +1,7 @@
+:plain
+  var partial = "#{escape_javascript(render partial: 'form', locals: { remote: true })}";
+  // Повторное нажатие
+  if ($('form.simple_form').length)
+    $('form.simple_form').remove();
+  else
+    $('table.table').before(partial);
