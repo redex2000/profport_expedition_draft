@@ -1,3 +1,7 @@
-:plain
-  $('form.simple_form').remove();
-  $('#expeditions').prepend('#{escape_javascript(render(partial: 'expedition', object: @expedition))}');
+- if @expedition.errors.empty?
+  :plain
+    $('form.simple_form').remove();
+    $('#expeditions').prepend('#{escape_javascript(render(partial: 'expedition', object: @expedition))}');
+- else
+  :plain
+    $('form.simple_form').replaceWith('#{escape_javascript(render(partial: 'form'))}');
