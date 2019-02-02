@@ -1,10 +1,14 @@
 class ExpeditionsController < ApplicationController
-  before_action :set_model, except: %I[index new create jsonp cors]
+  before_action :set_model, except: %I[index new create jsonp cors react]
   before_action :authorize_class, only: %I[index new create]
   skip_before_action :authenticate_user!, only: %I[jsonp cors]
 
   def index
     @expeditions = Expedition.all
+    respond_to do |format|
+      format.html
+      format.json { render json: @expeditions }
+    end
   end
 
   def show

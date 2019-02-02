@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   resources :expeditions do
     get :jsonp, on: :collection
     get :cors, on: :collection
+    get :react, on: :collection
   end
   resources :itineraries
   resources :spaceships
