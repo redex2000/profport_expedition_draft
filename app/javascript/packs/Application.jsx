@@ -14,9 +14,7 @@ export default class Application extends React.Component {
     render() {
         return (
             <table className="table table-hover">
-                <tbody>
-                    <Expeditions expeditions={values} />
-                </tbody>
+                <Expeditions expeditions={values} />
             </table>
         );
     }

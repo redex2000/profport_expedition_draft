@@ -10,24 +10,22 @@ export default class Expeditions extends React.Component {
   }
 
   componentDidMount() {
-    fetch('/v1/expeditions.json',
-      {
-        method: 'get',
-        headers: {
-          'Authorization': 'Token fyy-ifafEy7vy97M-REq'
-        }
-      })
+    let promise = fetch('/expeditions.json')
       .then((response) => response.json())
-      .then((result) => console.log(result))
+      .then((result) => result)
       .catch(err => console.error('Ошибка получения данных'))
+    promise.then(res => console.log(res))
   }
 
   render() {
     const {expeditions} = this.state;
-    return expeditions.map((expedition) => {
-      return (
-        <Expedition data={expedition}/>
-      );
-    })
+    const template = expeditions.map((expedition) => {
+      return <Expedition data={expedition}/>;
+    });
+    return (
+      <tbody>
+        {template}
+      </tbody>
+    );
   }
 }
